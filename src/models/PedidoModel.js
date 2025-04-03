@@ -24,7 +24,7 @@ const Pedido = sequelize.define(
 );
 
 Pedido.belongsTo(Token, {
-  as: 'produto',
+  as: 'token',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {

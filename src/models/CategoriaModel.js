@@ -13,8 +13,6 @@ const Categoria = sequelize.define(
     nome: {
       field: 'nome',
       type: DataTypes.STRING,
-      autoIncrement: true,
-      primaryKey: true,
     },
   },
   {
