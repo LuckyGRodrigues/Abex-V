@@ -1,35 +1,31 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
-import Pedido from './PedidoModel';
+import Categoria from './CategoriaModel';
 
 const Produto = sequelize.define(
   'produto',
   {
     id: {
       field: 'id',
-      type: DataTypes.STRING(11),
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-
     nome: {
       field: 'nome',
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING,
     },
-
     descricaoProduto: {
       field: 'descricao_produto',
-      type: DataTypes.NUMBER(20),
+      type: DataTypes.STRING,
     },
-
-    quantidade: {
-      field: 'quantidade',
-      type: DataTypes.STRING(100),
-    },
-
     valor: {
       field: 'valor',
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.DOUBLE,
+    },
+    imagem: {
+      field: 'imagem',
+      type: DataTypes.STRING,
     },
   },
   {
@@ -38,14 +34,14 @@ const Produto = sequelize.define(
   },
 );
 
-Produto.belongsTo(Pedido, {
-  as: 'pedido',
+Produto.belongsTo(Categoria, {
+  as: 'categoria',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    name: 'idPedido',
+    name: 'idCategoria',
     allowNull: false,
-    field: 'id_pedido',
+    field: 'id_categoria',
   },
 });
 

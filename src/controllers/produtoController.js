@@ -1,11 +1,11 @@
-import Produto from '../models/ProdutoModel';
+import ComandaModel from '../models/ComandaModel';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await Produto.findAll({
+      const response = await ComandaModel.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -14,7 +14,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await Produto.findOne({
+    const response = await ComandaModel.findOne({
       where: {
         id,
       },
@@ -35,11 +35,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id, nome, descricaoProduto, quantidade, valor, idPedido,
+      id, nome, descricaoProduto, valor, imagem,
     } = req.body;
 
-    const response = await Produto.create({
-      id, nome, descricaoProduto, quantidade, valor, idPedido,
+    const response = await ComandaModel.create({
+      id, nome, descricaoProduto, valor, imagem,
     });
 
     return res.status(201).send({
@@ -65,7 +65,7 @@ const update = async (req, res) => {
       });
     }
 
-    const response = await Produto.findOne({
+    const response = await ComandaModel.findOne({
       where: {
         id,
       },
@@ -106,7 +106,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await Produto.findOne({
+    const response = await ComandaModel.findOne({
       where: {
         id,
       },

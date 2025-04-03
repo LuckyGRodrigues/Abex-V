@@ -1,13 +1,12 @@
-import PedidoProduto from '../models/PedidoProdutoModel';
+import ComandaModel from '../models/ComandaModel';
 
 const get = async (req, res) => {
   try {
-    const idProduto = req.params.idProduto ? req.params.idProduto.toString().replace(/\D/g, '') : null;
-    const idPedido = req.params.idPedido ? req.params.idPedido.toString().replace(/\D/g, '') : null;
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
-    if (!idProduto && !idPedido) {
-      const response = await PedidoProduto.findAll({
-        order: [['idProduto', 'asc']],
+    if (!id) {
+      const response = await ComandaModel.findAll({
+        order: [['id', 'asc']],
       });
       return res.status(200).send({
         message: 'Dados Encontrados!',
@@ -15,10 +14,9 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await PedidoProduto.findOne({
+    const response = await ComandaModel.findOne({
       where: {
-        idProduto,
-        idPedido,
+        id,
       },
     });
 
@@ -37,11 +35,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      idPedido, idProduto, quantidade,
+      id, nome,
     } = req.body;
 
-    const response = await PedidoProduto.create({
-      idPedido, idProduto, quantidade,
+    const response = await ComandaModel.create({
+      id, nome,
     });
 
     return res.status(201).send({
@@ -58,20 +56,18 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const idProduto = req.params.idProduto ? req.params.idProduto.toString().replace(/\D/g, '') : null;
-    const idPedido = req.params.idPedido ? req.params.idPedido.toString().replace(/\D/g, '') : null;
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
-    if (!idProduto || !idPedido) {
+    if (!id) {
       return res.status(400).send({
         message: 'id não informado',
         response: [],
       });
     }
 
-    const response = await PedidoProduto.findOne({
+    const response = await ComandaModel.findOne({
       where: {
-        idProduto,
-        idPedido,
+        id,
       },
     });
 
@@ -101,20 +97,18 @@ const update = async (req, res) => {
 
 const destroy = async (req, res) => {
   try {
-    const idProduto = req.params.idProduto ? req.params.idProduto.toString().replace(/\D/g, '') : null;
-    const idPedido = req.params.idPedido ? req.params.idPedido.toString().replace(/\D/g, '') : null;
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
-    if (!idProduto && !idPedido) {
+    if (!id) {
       return res.status(400).send({
         message: 'id não informado',
         response: [],
       });
     }
 
-    const response = await PedidoProduto.findOne({
+    const response = await ComandaModel.findOne({
       where: {
-        idProduto,
-        idPedido,
+        id,
       },
     });
 

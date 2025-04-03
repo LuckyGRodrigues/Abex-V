@@ -1,11 +1,11 @@
-import PedidoModel from '../models/PedidoModel';
+import ComandaModel from '../models/ComandaModel';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await PedidoModel.findAll({
+      const response = await ComandaModel.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -14,7 +14,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await PedidoModel.findOne({
+    const response = await ComandaModel.findOne({
       where: {
         id,
       },
@@ -35,11 +35,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id, cpfUsuario,
+      id, quantidade, idProduto, idToken,
     } = req.body;
 
-    const response = await PedidoModel.create({
-      id, cpfUsuario,
+    const response = await ComandaModel.create({
+      id, quantidade, idProduto, idToken,
     });
 
     return res.status(201).send({
@@ -65,7 +65,7 @@ const update = async (req, res) => {
       });
     }
 
-    const response = await PedidoModel.findOne({
+    const response = await ComandaModel.findOne({
       where: {
         id,
       },
@@ -106,7 +106,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await PedidoModel.findOne({
+    const response = await ComandaModel.findOne({
       where: {
         id,
       },

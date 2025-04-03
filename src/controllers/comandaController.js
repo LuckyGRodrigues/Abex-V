@@ -35,11 +35,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id, data, hora, idPedido,
+      id, idPedido,
     } = req.body;
 
     const response = await ComandaModel.create({
-      id, data, hora, idPedido,
+      id, idPedido,
     });
 
     return res.status(201).send({

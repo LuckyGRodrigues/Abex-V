@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
-import Usuario from './UsuarioModel';
+import Token from './TokenModel';
+import Produto from './ProdutoModel';
 
 const Pedido = sequelize.define(
   'pedido',
@@ -11,6 +12,10 @@ const Pedido = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    quantidade: {
+      field: 'quantidade',
+      type: DataTypes.NUMBER,
+    },
   },
   {
     freezeTableName: true,
@@ -18,14 +23,25 @@ const Pedido = sequelize.define(
   },
 );
 
-Pedido.belongsTo(Usuario, {
-  as: 'usuario',
+Pedido.belongsTo(Token, {
+  as: 'produto',
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    name: 'cpfUsuario',
+    name: 'idToken',
     allowNull: false,
-    field: 'cpf_usuario',
+    field: 'id_token',
+  },
+});
+
+Pedido.belongsTo(Produto, {
+  as: 'produto',
+  onDelete: 'no action',
+  onUpdate: 'no action',
+  foreignKey: {
+    name: 'idProduto',
+    allowNull: false,
+    field: 'id_produto',
   },
 });
 
