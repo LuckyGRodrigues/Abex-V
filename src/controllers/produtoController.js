@@ -1,11 +1,11 @@
-import ComandaModel from '../models/ComandaModel';
+import ProdutoModel from '../models/ProdutoModel';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await ComandaModel.findAll({
+      const response = await ProdutoModel.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -14,7 +14,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await ComandaModel.findOne({
+    const response = await ProdutoModel.findOne({
       where: {
         id,
       },
@@ -32,14 +32,48 @@ const get = async (req, res) => {
   }
 };
 
+const getProdutoByIdCategoria = async (req, res) => {
+  try {
+    const idCategoria = req.params.idCategoria ? req.params.idCategoria.toString().replace(/\D/g, '') : null;
+
+    if (!idCategoria || Number.isNaN(Number(idCategoria))) {
+      return res.status(400).send({
+        message: 'ID da categoria é obrigatório e deve ser um número válido.',
+      });
+    }
+
+    const response = await ProdutoModel.findAll({
+      where: {
+        idCategoria,
+      },
+    });
+
+    if (!response || response.length === 0) {
+      return res.status(404).send({
+        message: 'Nenhum produto encontrado para esta categoria.',
+      });
+    }
+
+    return res.status(200).send({
+      message: 'Dados encontrados!',
+      response,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: 'Ops! Ocorreu um erro no servidor.',
+      response: error.message,
+    });
+  }
+};
+
 const create = async (req, res) => {
   try {
     const {
-      id, nome, descricaoProduto, valor, imagem,
+      id, nome, descricaoProduto, valor, imagem, idCategoria,
     } = req.body;
 
-    const response = await ComandaModel.create({
-      id, nome, descricaoProduto, valor, imagem,
+    const response = await ProdutoModel.create({
+      id, nome, descricaoProduto, valor, imagem, idCategoria,
     });
 
     return res.status(201).send({
@@ -65,7 +99,7 @@ const update = async (req, res) => {
       });
     }
 
-    const response = await ComandaModel.findOne({
+    const response = await ProdutoModel.findOne({
       where: {
         id,
       },
@@ -106,7 +140,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await ComandaModel.findOne({
+    const response = await ProdutoModel.findOne({
       where: {
         id,
       },
@@ -135,6 +169,7 @@ const destroy = async (req, res) => {
 
 export default {
   get,
+  getProdutoByIdCategoria,
   create,
   update,
   destroy,
