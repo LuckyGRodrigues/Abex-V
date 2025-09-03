@@ -45,4 +45,4 @@ Produto.belongsTo(Categoria, {
   },
 });
 
-export default Produto;
+export default Produto; 
