@@ -1,17 +1,7 @@
-import categoriaRoute from './categoriaRoute';
-import pedidoRoute from './pedidoRoute';
-import produtoRoute from './produtoRoute';
-import tokenRoute from './tokenRoute';
-import comandaRoute from './comandaRoute';
-import administradorRoute from './administradorRoute';
+import usuarioRoute from './usuarioRoute';
 
 function Routes(app) {
-  categoriaRoute(app);
-  tokenRoute(app);
-  produtoRoute(app);
-  pedidoRoute(app);
-  comandaRoute(app);
-  administradorRoute(app);
+  usuarioRoute(app);
 }
 
 export default Routes;

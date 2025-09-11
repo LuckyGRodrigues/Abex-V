@@ -1,9 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
-import Categoria from './CategoriaModel';
 
-const Produto = sequelize.define(
-  'produto',
+const Usuario = sequelize.define(
+  'usuario',
   {
     id: {
       field: 'id',
@@ -34,15 +33,15 @@ const Produto = sequelize.define(
   },
 );
 
-Produto.belongsTo(Categoria, {
-  as: 'categoria',
-  onDelete: 'no action',
-  onUpdate: 'no action',
-  foreignKey: {
-    name: 'idCategoria',
-    allowNull: false,
-    field: 'id_categoria',
-  },
-});
+export default Usuario;
 
-export default Produto; 
+// Produto.belongsTo(Categoria, {
+//   as: 'categoria',
+//   onDelete: 'no action',
+//   onUpdate: 'no action',
+//   foreignKey: {
+//     name: 'idCategoria',
+//     allowNull: false,
+//     field: 'id_categoria',
+//   },
+// });
