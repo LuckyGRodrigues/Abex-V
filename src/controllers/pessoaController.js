@@ -1,11 +1,11 @@
-import UsuarioModel from '../models/UsuarioModel';
+import PessoaModel from '../models/PessoaModel';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await UsuarioModel.findAll({
+      const response = await PessoaModel.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -14,7 +14,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await UsuarioModel.findOne({
+    const response = await PessoaModel.findOne({
       where: {
         id,
       },
@@ -35,11 +35,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id, nome, descricaoProduto, valor, imagem, idCategoria,
+      id, nome, email, telefone, empresa, cidade,
     } = req.body;
 
-    const response = await UsuarioModel.create({
-      id, nome, descricaoProduto, valor, imagem, idCategoria,
+    const response = await PessoaModel.create({
+      id, nome, email, telefone, empresa, cidade,
     });
 
     return res.status(201).send({
@@ -65,7 +65,7 @@ const update = async (req, res) => {
       });
     }
 
-    const response = await UsuarioModel.findOne({
+    const response = await PessoaModel.findOne({
       where: {
         id,
       },
@@ -106,7 +106,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await UsuarioModel.findOne({
+    const response = await PessoaModel.findOne({
       where: {
         id,
       },

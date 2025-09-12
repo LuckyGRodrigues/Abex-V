@@ -1,12 +1,11 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
-import Pessoa from './PessoaModel';
 
-const Usuario = sequelize.define(
-  'usuarios',
+const Pessoa = sequelize.define(
+  'pessoa',
   {
     id: {
-      field: 'id_usuario',
+      field: 'id_pessoa',
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -19,12 +18,16 @@ const Usuario = sequelize.define(
       field: 'email',
       type: DataTypes.STRING,
     },
-    senha: {
-      field: 'senha',
-      type: DataTypes.STRING,
-    },
     telefone: {
       field: 'telefone',
+      type: DataTypes.STRING,
+    },
+    empresa: {
+      field: 'empresa',
+      type: DataTypes.STRING,
+    },
+    cidade: {
+      field: 'cidade',
       type: DataTypes.STRING,
     },
   },
@@ -34,15 +37,4 @@ const Usuario = sequelize.define(
   },
 );
 
-Usuario.belongsTo(Pessoa, {
-  as: 'pessoa',
-  onDelete: 'no action',
-  onUpdate: 'no action',
-  foreignKey: {
-    name: 'idPessoa',
-    allowNull: false,
-    field: 'id_pessoa',
-  },
-});
-
-export default Usuario;
+export default Pessoa;
