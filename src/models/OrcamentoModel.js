@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
+import Pessoa from './PessoaModel';
 
 const Orcamento = sequelize.define(
   'orcamento',
@@ -16,7 +17,7 @@ const Orcamento = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    valor_estimado: {
+    valorEstimado: {
       field: 'valor_estimado',
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -52,4 +53,4 @@ Orcamento.belongsTo(Pessoa, {
   },
 });
 
-export default orcamento;
+export default Orcamento;

@@ -35,11 +35,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id, descricao, valor_estimado, data, status, idPessoa,
+      id, descricao, valorEstimado, data, status, idPessoa,
     } = req.body;
 
     const response = await Model.create({
-      id, descricao, valor_estimado, data, status, idPessoa,
+      id, descricao, valorEstimado, data, status, idPessoa,
     });
 
     return res.status(201).send({
