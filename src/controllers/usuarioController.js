@@ -133,9 +133,48 @@ const destroy = async (req, res) => {
   }
 };
 
+const checkPassword = async (req, res) => {
+  try {
+    const { email, senha } = req.body;
+
+    const usuario = await Model.findOne({
+      where: { email },
+    });
+
+    if (!usuario) {
+      return res.status(404).send({
+        success: false,
+        message: 'Usuário não encontrado',
+        response: [],
+      });
+    }
+
+    const senhaValida = usuario.senha === senha;
+
+    if (!senhaValida) {
+      return res.status(401).send({
+        success: false,
+        message: 'Senha inválida',
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: 'Senha válida',
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: 'Ops!',
+      response: error.message,
+    });
+  }
+};
+
 export default {
   get,
   create,
   update,
   destroy,
+  checkPassword,
 };

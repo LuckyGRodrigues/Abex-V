@@ -6,4 +6,5 @@ export default (app) => {
   app.post('/usuario/create', controller.create);
   app.patch('/usuario/update/:id', controller.update);
   app.delete('/usuario/delete/:id', controller.destroy);
+  app.post('/usuario/check-password', controller.checkPassword);
 };
