@@ -101,20 +101,16 @@ const destroy = async (req, res) => {
 
     if (!id) {
       return res.status(400).send({
-        message: 'id não informado',
+        message: 'ID não informado.',
         response: [],
       });
     }
 
-    const response = await PessoaModel.findOne({
-      where: {
-        id,
-      },
-    });
+    const pessoa = await PessoaModel.findOne({ where: { id } });
 
-    if (!response) {
-      return res.status(500).send({
-        message: 'id Não Encontrado na Base',
+    if (!pessoa) {
+      return res.status(404).send({
+        message: 'Pessoa não encontrada na base.',
         response: [],
       });
     }
@@ -127,7 +123,7 @@ const destroy = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).send({
-      message: 'Ops!',
+      message: 'Ops! Erro ao deletar registro.',
       response: error.message,
     });
   }
