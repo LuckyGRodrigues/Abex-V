@@ -1,4 +1,4 @@
-import PessoaModel from '../models/PessoaModel';
+import PessoaModel from '../models/PessoaModel.js';
 
 const get = async (req, res) => {
   try {
@@ -9,24 +9,29 @@ const get = async (req, res) => {
         order: [['id', 'asc']],
       });
       return res.status(200).send({
-        message: 'Dados Encontrados!',
+        message: 'Dados encontrados!',
         response,
       });
     }
 
     const response = await PessoaModel.findOne({
-      where: {
-        id,
-      },
+      where: { id },
     });
 
+    if (!response) {
+      return res.status(404).send({
+        message: 'Pessoa não encontrada!',
+        response: [],
+      });
+    }
+
     return res.status(200).send({
-      message: 'Dados Encontrados!',
+      message: 'Dados encontrados!',
       response,
     });
   } catch (error) {
     return res.status(500).send({
-      message: 'Ops!',
+      message: 'Ops! Erro ao buscar dados.',
       response: error.message,
     });
   }
@@ -35,20 +40,33 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id, nome, email, telefone, empresa, cidade,
+      cpf_cnpj, nome, email, telefone, empresa, cidade, tipo,
     } = req.body;
 
+    if (!cpf_cnpj || !nome || !tipo) {
+      return res.status(400).send({
+        message: 'Campos obrigatórios: cpf_cnpj, nome e tipo.',
+        response: [],
+      });
+    }
+
     const response = await PessoaModel.create({
-      id, nome, email, telefone, empresa, cidade,
+      cpf_cnpj,
+      nome,
+      email,
+      telefone,
+      empresa,
+      cidade,
+      tipo,
     });
 
     return res.status(201).send({
-      message: 'Dados Criados!',
+      message: 'Pessoa criada com sucesso!', 
       response,
     });
   } catch (error) {
     return res.status(500).send({
-      message: 'Ops!',
+      message: 'Ops! Erro ao criar registro.',
       response: error.message,
     });
   }
@@ -60,36 +78,35 @@ const update = async (req, res) => {
 
     if (!id) {
       return res.status(400).send({
-        message: 'id não informado',
+        message: 'ID não informado.',
         response: [],
       });
     }
 
-    const response = await PessoaModel.findOne({
-      where: {
-        id,
-      },
-    });
+    const pessoa = await PessoaModel.findOne({ where: { id } });
 
-    if (!response) {
+    if (!pessoa) {
       return res.status(404).send({
-        message: 'id Não Encontrado na Base de Dados',
+        message: 'Pessoa não encontrada na base de dados.',
         response: [],
       });
     }
 
-    Object.keys(req.body).forEach((chave) => {
-      response[chave] = req.body[chave];
+    Object.keys(req.body).forEach((campo) => {
+      if (req.body[campo] !== undefined) {
+        pessoa[campo] = req.body[campo];
+      }
     });
 
-    await response.save();
-    return res.status(201).send({
-      message: 'Dados Atualizados',
-      response,
+    await pessoa.save();
+
+    return res.status(200).send({
+      message: 'Dados atualizados com sucesso!',
+      response: pessoa,
     });
   } catch (error) {
     return res.status(500).send({
-      message: 'Ops!',
+      message: 'Ops! Erro ao atualizar registro.',
       response: error.message,
     });
   }
@@ -115,10 +132,10 @@ const destroy = async (req, res) => {
       });
     }
 
-    await response.destroy();
+    await pessoa.destroy();
 
     return res.status(200).send({
-      message: 'Usuário deletado com sucesso',
+      message: 'Pessoa deletada com sucesso!',
       response: [],
     });
   } catch (error) {
