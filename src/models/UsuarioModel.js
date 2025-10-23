@@ -3,7 +3,7 @@ import { sequelize } from '../config/config';
 import Pessoa from './PessoaModel';
 
 const Usuario = sequelize.define(
-  'usuarios',
+  'usuario',
   {
     id: {
       field: 'id_usuario',
@@ -23,8 +23,8 @@ const Usuario = sequelize.define(
       field: 'senha',
       type: DataTypes.STRING,
     },
-    telefone: {
-      field: 'telefone',
+    tipo: {
+      field: 'tipo',
       type: DataTypes.STRING,
     },
   },

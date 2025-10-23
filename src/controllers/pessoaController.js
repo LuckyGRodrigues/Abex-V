@@ -40,7 +40,11 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
+<<<<<<< Updated upstream
       cpf_cnpj, nome, email, telefone, empresa, cidade, tipo,
+=======
+      id, cpfCnpj, nome, email, telefone, empresa, cidade, tipo,
+>>>>>>> Stashed changes
     } = req.body;
 
     if (!cpf_cnpj || !nome || !tipo) {
@@ -51,6 +55,7 @@ const create = async (req, res) => {
     }
 
     const response = await PessoaModel.create({
+<<<<<<< Updated upstream
       cpf_cnpj,
       nome,
       email,
@@ -58,6 +63,9 @@ const create = async (req, res) => {
       empresa,
       cidade,
       tipo,
+=======
+      id, cpfCnpj, nome, email, telefone, empresa, cidade, tipo,
+>>>>>>> Stashed changes
     });
 
     return res.status(201).send({

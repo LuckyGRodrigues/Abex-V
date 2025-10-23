@@ -5,7 +5,7 @@ import Pessoa from './PessoaModel';
 const Orcamento = sequelize.define(
   'orcamento',
   {
-    id_orcamento: {
+    id: {
       field: 'id_orcamento',
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -13,27 +13,23 @@ const Orcamento = sequelize.define(
     },
     descricao: {
       field: 'descricao',
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     valorEstimado: {
       field: 'valor_estimado',
       type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      allowNull: false,
     },
     data: {
       field: 'data_criacao',
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     status: {
       field: 'status',
       type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+      allowNull: false,
     },
   },
   {

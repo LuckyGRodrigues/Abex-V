@@ -17,35 +17,70 @@ const Pessoa = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    cpfCnpj: {
+      field: 'cpf_cnpj',
+      type: DataTypes.STRING(18),
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true,
+      },
+    },
     nome: {
       field: 'nome',
       type: DataTypes.STRING(100),
       allowNull: false,
+<<<<<<< Updated upstream
+=======
+      validate: {
+        notEmpty: true,
+      },
+>>>>>>> Stashed changes
     },
     email: {
       field: 'email',
       type: DataTypes.STRING(100),
+<<<<<<< Updated upstream
       allowNull: true,
+=======
+>>>>>>> Stashed changes
     },
     telefone: {
       field: 'telefone',
       type: DataTypes.STRING(20),
+<<<<<<< Updated upstream
       allowNull: true,
+=======
+>>>>>>> Stashed changes
     },
     empresa: {
       field: 'empresa',
       type: DataTypes.STRING(100),
+<<<<<<< Updated upstream
       allowNull: true,
+=======
+>>>>>>> Stashed changes
     },
     cidade: {
       field: 'cidade',
       type: DataTypes.STRING(50),
+<<<<<<< Updated upstream
       allowNull: true,
     },
     tipo: {
       field: 'tipo',
       type: DataTypes.ENUM('Cliente', 'Colaborador', 'Fornecedor'),
       allowNull: false,
+=======
+    },
+    tipo: {
+      field: 'tipo',
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      validate: {
+        isIn: [['Cliente', 'Colaborador', 'Fornecedor']],
+      },
+>>>>>>> Stashed changes
     },
   },
   {
