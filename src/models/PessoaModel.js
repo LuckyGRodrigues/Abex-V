@@ -30,48 +30,22 @@ const Pessoa = sequelize.define(
       field: 'nome',
       type: DataTypes.STRING(100),
       allowNull: false,
-<<<<<<< Updated upstream
-=======
-      validate: {
-        notEmpty: true,
-      },
->>>>>>> Stashed changes
     },
     email: {
       field: 'email',
       type: DataTypes.STRING(100),
-<<<<<<< Updated upstream
-      allowNull: true,
-=======
->>>>>>> Stashed changes
     },
     telefone: {
       field: 'telefone',
       type: DataTypes.STRING(20),
-<<<<<<< Updated upstream
-      allowNull: true,
-=======
->>>>>>> Stashed changes
     },
     empresa: {
       field: 'empresa',
       type: DataTypes.STRING(100),
-<<<<<<< Updated upstream
-      allowNull: true,
-=======
->>>>>>> Stashed changes
     },
     cidade: {
       field: 'cidade',
       type: DataTypes.STRING(50),
-<<<<<<< Updated upstream
-      allowNull: true,
-    },
-    tipo: {
-      field: 'tipo',
-      type: DataTypes.ENUM('Cliente', 'Colaborador', 'Fornecedor'),
-      allowNull: false,
-=======
     },
     tipo: {
       field: 'tipo',
@@ -80,7 +54,6 @@ const Pessoa = sequelize.define(
       validate: {
         isIn: [['Cliente', 'Colaborador', 'Fornecedor']],
       },
->>>>>>> Stashed changes
     },
   },
   {

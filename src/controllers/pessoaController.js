@@ -1,4 +1,4 @@
-import PessoaModel from '../models/PessoaModel.js';
+import PessoaModel from '../models/PessoaModel';
 
 const get = async (req, res) => {
   try {
@@ -40,36 +40,22 @@ const get = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-<<<<<<< Updated upstream
-      cpf_cnpj, nome, email, telefone, empresa, cidade, tipo,
-=======
       id, cpfCnpj, nome, email, telefone, empresa, cidade, tipo,
->>>>>>> Stashed changes
     } = req.body;
 
-    if (!cpf_cnpj || !nome || !tipo) {
+    if (!id || !cpfCnpj || !nome || !tipo) {
       return res.status(400).send({
-        message: 'Campos obrigatórios: cpf_cnpj, nome e tipo.',
+        message: 'Campos obrigatórios: cpfCnpj, nome e tipo.',
         response: [],
       });
     }
 
     const response = await PessoaModel.create({
-<<<<<<< Updated upstream
-      cpf_cnpj,
-      nome,
-      email,
-      telefone,
-      empresa,
-      cidade,
-      tipo,
-=======
       id, cpfCnpj, nome, email, telefone, empresa, cidade, tipo,
->>>>>>> Stashed changes
     });
 
     return res.status(201).send({
-      message: 'Pessoa criada com sucesso!', 
+      message: 'Pessoa criada com sucesso!',
       response,
     });
   } catch (error) {
