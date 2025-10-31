@@ -11,12 +11,6 @@ const Pessoa = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    cpf_cnpj: {
-      field: 'cpf_cnpj',
-      type: DataTypes.STRING(18),
-      allowNull: false,
-      unique: true,
-    },
     cpfCnpj: {
       field: 'cpf_cnpj',
       type: DataTypes.STRING(18),

@@ -43,13 +43,6 @@ const create = async (req, res) => {
       id, cpfCnpj, nome, email, telefone, empresa, cidade, tipo,
     } = req.body;
 
-    if (!id || !cpfCnpj || !nome || !tipo) {
-      return res.status(400).send({
-        message: 'Campos obrigatórios: cpfCnpj, nome e tipo.',
-        response: [],
-      });
-    }
-
     const response = await PessoaModel.create({
       id, cpfCnpj, nome, email, telefone, empresa, cidade, tipo,
     });
