@@ -2,7 +2,7 @@ import pessoaRoute from './pessoaRoute';
 import usuarioRoute from './usuarioRoute';
 import orcamentoRoute from './orcamentoRoute';
 import controleObrasRoute from './controleObrasRoute';
-import financeiro from './financeiro';
+import financeiro from './financeiroRoute';
 
 function Routes(app) {
   pessoaRoute(app);
