@@ -94,7 +94,7 @@ Financeiro.belongsTo(Usuario, {
   onDelete: 'no action',
   onUpdate: 'no action',
   foreignKey: {
-    name: 'responsavel',
+    name: 'idResponsavel',
     allowNull: false,
     field: 'responsavel',
   },
